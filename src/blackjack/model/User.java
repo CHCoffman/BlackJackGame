@@ -28,6 +28,7 @@ public class User extends Hands {
     if (hand.size() == 2 && (hand.get(0).getValue() == hand.get(1).getValue())){
       ArrayList<String> split = createHand();
       split.get(0) = hand.get(0);
+      hand.remove(0);
       hands = hands + 1;
     }
   }
