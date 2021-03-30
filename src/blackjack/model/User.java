@@ -7,7 +7,7 @@ public class User extends Hands {
   
   public void hit(){
     /* More to be implemented */
-    /* addCard(arg) is method of class Hands. Whenever called, it accepts an argument type ArrayList, and adds one card to this list*/
+    /* addCard(arg) is method of class Hand. Whenever called, it accepts an argument type ArrayList, and adds one card to this list*/
     addCard(hand);
   }
   
@@ -24,7 +24,7 @@ public class User extends Hands {
   
   public void split(){
      /* More to be implemented */
-    /* getValue() is a method of class Hands. It returns the string from "2" to "K" (Ex: "Ace").
+    /* getValue() is a method of class Hand. It returns the string from "2" to "K" (Ex: "Ace").
     */
     if (hand.size() == 2 && (hand.get(0).getValue() == hand.get(1).getValue())){
       ArrayList<String> split = createHand();
