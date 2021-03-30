@@ -7,6 +7,7 @@ public class User extends Hands {
   
   public void hit(){
     /* More to be implemented */
+    /* addCard(arg) is method of class Hands. Whenever called, it accepts an argument type ArrayList, and adds one card to this list*/
     addCard(hand);
   }
   
