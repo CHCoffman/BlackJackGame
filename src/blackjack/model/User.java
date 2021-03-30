@@ -21,7 +21,7 @@ public class User extends Hand {
   }
   
   public void split(){
-    /* getValue() is a method of class Hand. It returns the string from "2" to "K" (Ex: "Ace").
+    /* getValue() is a method of class Hand. It returns one string, representing card value ranging from "2" to "K" (Ex: returns "Ace").
     */
     if (hand.size() == 2 && (hand.get(0).getValue() == hand.get(1).getValue())){
       ArrayList<String> split = createHand();
