@@ -44,7 +44,6 @@ public class User extends Hand {
   }
   
   public int getWins(){
-     /* More to be implemented */
     return wins; 
   }
   
