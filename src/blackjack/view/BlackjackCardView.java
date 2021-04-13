@@ -1,42 +1,42 @@
 package blackjack.view;
-import blackjack.view.guiUtils.ImageActionComponent;
 
 import java.awt.*;
+import java.awt.image.ImageObserver;
 
 public class BlackjackCardView {
-    private static final String FilePathBase = "Resources\\Cards\\PNG\\";
-    public enum CardSuite {
-        CLUBS,
-        SPADES,
-        DIAMONDS,
-        HEARTS,
-    }
-    private ImageActionComponent m_displayComponent;
-
-    public BlackjackCardView(int num, CardSuite suite) {
-        assert num < 14 && num > 0;
-        char fileCardID = '\0';
-        char fileCardNum = '0';
-        switch(suite) {
-            case CLUBS: fileCardID = 'C'; break;
-            case SPADES: fileCardID = 'S'; break;
-            case HEARTS: fileCardID = 'H'; break;
-            case DIAMONDS: fileCardID = 'D'; break;
-            default: assert false; break;
-        }
-        if(num > 10 || num == 1) {
-            switch(num) {
-                case 1: fileCardNum = 'A'; break;
-                case 11: fileCardNum = 'J'; break;
-                case 12: fileCardNum = 'Q'; break;
-                case 13: fileCardNum = 'K'; break;
+    private Image m_data = null;
+    private int m_cardNumber = -1;
+    private Dimension m_viewDimensions = new Dimension();
+    private BlackjackCardData.CardSuite m_suite = BlackjackCardData.CardSuite.INVALID;
+    public BlackjackCardView(Image image, int num, BlackjackCardData.CardSuite suite) {
+        m_data = image;
+        m_cardNumber = num;
+        m_suite = suite;
+        m_viewDimensions.width = m_data.getWidth(new ImageObserver() {
+            @Override
+            public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
+                return true;
             }
-        }
-        else {
-            fileCardNum = Character.forDigit(num, 10);
-        }
-        String cardImgSrcPath = FilePathBase + fileCardNum + fileCardID + ".png";
-        m_displayComponent = new ImageActionComponent(cardImgSrcPath, new Dimension(100, 150));
+        });
+        m_viewDimensions.height = m_data.getHeight(new ImageObserver() {
+            @Override
+            public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
+                return true;
+            }
+        });
     }
-    ImageActionComponent GetComponent() { return m_displayComponent; }
+    public Image GetImage() { return m_data; }
+    public Dimension GetDimensions() { return m_viewDimensions; }
+    public boolean Scale(Dimension d) {
+        if(d.width <= 0 || d.height <= 0) {
+            return false;
+        }
+        m_viewDimensions = d;
+        m_data = m_data.getScaledInstance(d.width, d.height, Image.SCALE_FAST);
+        return true;
+    }
+    @Override
+    public String toString() {
+        return String.valueOf(m_cardNumber) + " of " + m_suite.name();
+    }
 }
