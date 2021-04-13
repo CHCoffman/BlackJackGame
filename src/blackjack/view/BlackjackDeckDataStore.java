@@ -29,12 +29,15 @@ public class BlackjackDeckDataStore {
             m_cardData[i + offset - 1] = new BlackjackCardData(i, suite);
         }
     }
+    public static BlackjackCardView GetInvalidCard(Dimension viewDimensions) {
+        return new BlackjackCardView(m_cardData[INVALID_CARD_INDEX].GetScaledInstance(viewDimensions), -1, BlackjackCardData.CardSuite.INVALID);
+    }
     public static BlackjackCardView GetCard(BlackjackCardData.CardSuite suite, int num, Dimension viewDimensions) throws BlackjackDeckDataStoreException {
         int offset = GetBufferOffsetOfSuite(suite);
         int location = num + offset - 1;
         if(location < 0 || location >= 52 || offset == -1) {
             System.out.println("Invalid card " + num + " of " + suite.name() + " passed in BlackjackDeckDataStore.GetCard");
-            return new BlackjackCardView(m_cardData[INVALID_CARD_INDEX].GetScaledInstance(viewDimensions), num, suite);
+            return GetInvalidCard(viewDimensions);
         }
         return new BlackjackCardView(m_cardData[num + GetBufferOffsetOfSuite(suite)-1].GetScaledInstance(viewDimensions), num, suite);
     }
