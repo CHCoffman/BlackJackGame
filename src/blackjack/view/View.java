@@ -12,7 +12,7 @@ public class View {
         GameWindow w = new GameWindow("Blackjack", new Dimension(800, 600));
         BlackjackHandComponent hand = new BlackjackHandComponent(5, new Dimension(100, 150));
         for(int i = 9; i < 14; i ++) {
-        hand.AddCard(i, BlackjackCardData.CardSuite.HEARTS);
+            hand.AddCard(i, BlackjackCardData.CardSuite.HEARTS);
         }
         w.add(hand);
         w.pack();

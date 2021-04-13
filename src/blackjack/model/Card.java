@@ -1,3 +1,4 @@
+package blackjack.model;
 
 public class Card {
 	int value;
