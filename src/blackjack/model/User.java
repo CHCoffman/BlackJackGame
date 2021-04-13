@@ -1,5 +1,7 @@
 package blackjack.model;
 
+import java.util.ArrayList;
+
 /* More to be implemented for class User  */
 public class User extends Hand {
   private int wins;
@@ -36,7 +38,7 @@ public class User extends Hand {
   }
   
   public ArrayList<Card> createHand(){
-    ArrayList<Card> hand = new ArrayList<Card>;
+    ArrayList<Card> hand = new ArrayList<Card>();
     return hand;
 }
   public void addWins(){
