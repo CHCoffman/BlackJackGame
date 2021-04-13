@@ -81,7 +81,6 @@ public class BlackjackHandComponent extends JPanel {
             remove(m_cards[index]);
         }
         m_cards[index] = v;
-        m_cards[index].setName(String.valueOf(index));
         m_cards[index].addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
