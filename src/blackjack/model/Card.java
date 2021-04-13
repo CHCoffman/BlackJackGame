@@ -3,7 +3,7 @@ public class Card {
 	int value;
 	String suit;
 	
-	Card(int vl, String st){
+	public Card(int vl, String st){
 		this.value = vl;
 		this.suit = st;
 	}
