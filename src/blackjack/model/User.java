@@ -4,10 +4,10 @@ package blackjack.model;
 public class User extends Hand {
   private int wins;
   private int hands;
-  private ArrayList<String> hand = new ArrayList<String>();
+  private ArrayList<Card> hand = new ArrayList<Card>();
   
   public void hit(){
-    /* addCard(arg) is method of class Hand. Whenever called, it accepts an argument type ArrayList, and adds one card to this list*/
+    /* addCard(arg) is method of class Hand. Whenever called, it accepts an argument type Card, and adds one card to this list*/
     addCard(hand);
   }
   
@@ -24,7 +24,7 @@ public class User extends Hand {
     /* getValue() is a method of class Hand. It returns one string, representing card value ranging from "2" to "K" (Ex: returns "Ace").
     */
     if (hand.size() == 2 && (hand.get(0).getValue() == hand.get(1).getValue())){
-      ArrayList<String> split = createHand();
+      ArrayList<Card> split = createHand();
       split.get(0) = hand.get(0);
       hand.remove(0);
       hands = hands + 1;
@@ -35,8 +35,8 @@ public class User extends Hand {
      System.out.println("You surrender");
   }
   
-  public ArrayList<String> createHand(){
-    ArrayList<String> hand = new ArrayList<String>;
+  public ArrayList<Card> createHand(){
+    ArrayList<Card> hand = new ArrayList<Card>;
     return hand;
 }
   public void addWins(){
