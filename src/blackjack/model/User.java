@@ -1,5 +1,7 @@
 package blackjack.model;
 
+import java.util.*;
+
 /* More to be implemented for class User  */
 public class User extends Hand {
   private int wins;
