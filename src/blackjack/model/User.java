@@ -1,6 +1,10 @@
 package blackjack.model;
 
+<<<<<<< HEAD
+import java.util.ArrayList;
+=======
 import java.util.*;
+>>>>>>> CCTest
 
 /* More to be implemented for class User  */
 public class User extends Hand {
@@ -38,7 +42,7 @@ public class User extends Hand {
   }
   
   public ArrayList<Card> createHand(){
-    ArrayList<Card> hand = new ArrayList<Card>;
+    ArrayList<Card> hand = new ArrayList<Card>();
     return hand;
 }
   public void addWins(){

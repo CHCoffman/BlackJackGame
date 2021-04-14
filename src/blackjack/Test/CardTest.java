@@ -1,7 +1,8 @@
 package blackjack.Test;
 
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.*;
-import blackjack.model.*;
+import blackjack.model.Card;
 
 import org.junit.After;
 import org.junit.Before;

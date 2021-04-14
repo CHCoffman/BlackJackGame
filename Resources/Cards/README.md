@@ -1,0 +1,1 @@
+Card images taken from: http://acbl.mybigcommerce.com/52-playing-cards/
