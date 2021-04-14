@@ -1,6 +1,10 @@
 package blackjack.model;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
+=======
+import java.util.*;
+>>>>>>> CCTest
 
 /* More to be implemented for class User  */
 public class User extends Hand {
