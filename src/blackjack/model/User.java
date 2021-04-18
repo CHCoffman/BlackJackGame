@@ -104,21 +104,30 @@ public class User extends Hand {
   public void determineWin(int handNumber, int dealerSum){
     int handSum = getHandSum(handNumber); // get sum of this hand
 
-    if(handSum == 21) {
+    if(handSum == 21 && dealerSum != 21) {
       System.out.println("\nYou got blackjack for this hand!\n");
       this.wins++;
     }
-    else if (handSum > dealerSum ) {
+    else if (handSum > dealerSum && handSum < 21) {
       System.out.println("\nThis hand beats the dealer.\n");
       this.wins++;
     }
-
-    else if (handSum == dealerSum){
-      System.out.println("\nThis hand has a tie with the dealer.\n");
+    
+     else if (handSum < dealerSum && dealerSum < 21){
+      System.out.println("\nThe dealer beats this hand.\n");
     }
 
-    else {
-      System.out.println("\nThe dealer beats this hand.\n");
+    else if (handSum == dealerSum && handSum < 21 && dealerSum < 21){
+      System.out.println("\nThis hand has a tie with the dealer.\n");
+    }
+ 
+    else if (dealerSum > 21 && handSum < 21){
+      System.out.println("\nThe dealer busts.\n");
+      this.wins++;
+    }
+    
+    else { // handSum > 21
+      System.out.println("\nThis hand busts.\n");
     }
 
   }
