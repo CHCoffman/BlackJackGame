@@ -10,7 +10,7 @@ public class User extends Hand {
   private ArrayList<ArrayList<Card>> handsList = new ArrayList<ArrayList<Card>>(); // list of hands the user has
   private ArrayList<Integer> numCards = new ArrayList<Integer>(); // numCards stores total cards for each hand
 
-  // hit function asks player which hand they want to hit
+  // hit function asks player which hand they want to hit, so handNumber argument is passed
   public void hit(int handNumber){
     /* addCard(arg) is method of class Hand. Whenever called, it accepts an argument type Card, and adds one card to hand (list of Card objects)*/
     if(this.numHands == 0){ // if player just starts and no hands yet
@@ -33,7 +33,8 @@ public class User extends Hand {
   }
 
   // Each hand receives only 1 opportunity to double down – directly after the initial two cards have been dealt.
-  // After receive the third card, you can no longer draw more card to that hand
+  // After receive the third card, you can no longer draw more card to that hand.
+  // Pass handNumber argument to indicate which hand the player wants to double down.
   public void doubledown(int handNumber){
     // Check if hand has 2 cards
     ArrayList<Card> wantToDB = handsList.get(handNumber);
@@ -47,20 +48,21 @@ public class User extends Hand {
 
   }
 
-  // Ask player which hand to split
+  // Pass handNumber argument to indicate which hand the player wants to split.
   public void split(int handNumber){
     /* getValue() is a method of class Hand. It returns one integer, representing card value ranging from "A" to "K" (Ex: returns 1 meaning "Ace").
      */
-    ArrayList<Card> wantToSplit = this.handsList.get(handNumber);
+    ArrayList<Card> wantToSplit = this.handsList.get(handNumber); 
+    // If the hand the player wants to split has exaclty 2 cards, and they have the same value (ex: "2" and "2"), then the hand can split
     if (wantToSplit.size() == 2 && (wantToSplit.get(0).getValue() == wantToSplit.get(1).getValue())){
       ArrayList<Card> split = new ArrayList<Card>();
-      split.add(0, wantToSplit.get(0));
-      wantToSplit.remove(0);
-      int totalForCurHand = this.numCards.get(handNumber);
+      split.add(0, wantToSplit.get(0)); // assign the first card of current hand to the split hand
+      wantToSplit.remove(0);  // remove the first card of current hand
+      int totalForCurHand = this.numCards.get(handNumber); 
       totalForCurHand--;
       this.numCards.set(handNumber, totalForCurHand); //decrement total cards in current hand
       this.numHands++; // increment total of hands user has. split hand is the latest one
-      this.numCards.add(1); // add 1 to totalCard in split hand
+      this.numCards.add(1); // add 1 to total cards in split hand
     }
   }
 
@@ -68,26 +70,25 @@ public class User extends Hand {
     System.out.println("\nYou surrender\n");
   }
 
-  // Pass handNumber: indicate which hand the player wants to get sum from
+  // handNumber: indicate which hand the player wants to get sum from
   public int getHandSum(int handNumber){
     int handSum = 0;
     int cardValue;
     int numAces = 0;
 
-    ArrayList<Card> wantSum = this.handsListget(handNumber);
-    for(int i = 0; i < wantSum.size(); i++){
-      cardValue = wantSum.getValue();
-      if(cardValue == 1){ //Ace
-        numAces++;
-        handSum += 11;
-      }
-      else if (cardValue > 10){ //face card
-        handSum += 10;
-      }
-      else{
-        handSum += cardValue;
-      }
+    ArrayList<Card> wantSum = this.handsList.get(handNumber);
+    cardValue = wantSum.getValue();
+    if(cardValue == 1){ //Ace
+      numAces++;
+      handSum += 11;
     }
+    else if (cardValue > 10){ //face card
+      handSum += 10;
+    }
+    else{
+      handSum += cardValue;
+    }
+   
     // decide whether ace is 1 or 11
     // while handSum > 21 and numAces > 0, change ace card from 11 to 1, decrement numAces
     while (handSum > 21 && numAces > 0){
@@ -97,8 +98,9 @@ public class User extends Hand {
 
     return handSum;
   }
-  // Check for wins among the user's hands, and incrementing the wins accordinly
-  // pass the hand you want to determine the win, and pass sum scores of dealer
+  
+  // Check for wins among the user's hands, and incrementing the wins accordingly.
+  // Pass the hand you want to determine the win, and pass sum scores of dealer
   public void determineWin(int handNumber, int dealerSum){
     int handSum = getHandSum(handNumber); // get sum of this hand
 
