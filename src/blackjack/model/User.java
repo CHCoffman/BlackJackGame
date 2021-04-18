@@ -35,7 +35,7 @@ public class User extends Hand {
   // Each hand receives only 1 opportunity to double down – directly after the initial two cards have been dealt.
   // After receive the third card, you can no longer draw more card to that hand.
   // Pass handNumber argument to indicate which hand the player wants to double down.
-  public void doubledown(int handNumber){
+  public void doubleDown(int handNumber){
     // Check if hand has 2 cards
     ArrayList<Card> wantToDB = handsList.get(handNumber);
     if(wantToDB.size() == 2){
