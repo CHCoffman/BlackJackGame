@@ -18,6 +18,7 @@ public class User extends Hand {
     this.numCards.set(0, 2); // total cards for this hand is 2 initially
     this.numHands++;
   }
+
   // hit function asks player which hand they want to hit, so handNumber argument is passed
   public void hit(int handNumber){
     /* addCard(arg) is method of class Hand. Whenever called, it accepts an argument type Card, and adds one card to hand (list of Card objects)*/
@@ -28,10 +29,10 @@ public class User extends Hand {
       this.numHands++;
     }
     else{
-      this.addCard(handsList.get(handNumber)); // add one card to the hand that player chooses to hit
-      int totalForCurHand = this.numCards.get(handNumber);
+      this.addCard(handsList.get(handNumber-1)); // add one card to the hand that player chooses to hit
+      int totalForCurHand = this.numCards.get(handNumber-1);
       totalForCurHand++;
-      this.numCards.set(handNumber, totalForCurHand); //increment total cards in current hand
+      this.numCards.set(handNumber-1, totalForCurHand); //increment total cards in current hand
     }
 
   }
