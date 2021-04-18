@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.*;
 
 public class User extends Hand {
-  private int wins;
+  private int wins = 0;
   private int numHands = 0;
   private ArrayList<Card> hand = new ArrayList<Card>(); // hand variable is array of Card objects
   private ArrayList<ArrayList<Card>> handsList = new ArrayList<ArrayList<Card>>(); // list of hands the user has
