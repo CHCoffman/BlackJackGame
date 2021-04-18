@@ -99,7 +99,7 @@ public class User extends Hand {
     return handSum;
   }
   
-  // Check for wins among the user's hands, and incrementing the wins accordingly.
+  // Check for win of a hand, and incrementing the win if condition holds.
   // Pass the hand you want to determine the win, and pass sum scores of dealer
   public void determineWin(int handNumber, int dealerSum){
     int handSum = getHandSum(handNumber); // get sum of this hand
