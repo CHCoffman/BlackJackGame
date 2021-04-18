@@ -10,13 +10,21 @@ public class User extends Hand {
   private ArrayList<ArrayList<Card>> handsList = new ArrayList<ArrayList<Card>>(); // list of hands the user has
   private ArrayList<Integer> numCards = new ArrayList<Integer>(); // numCards stores total cards for each hand
 
+  //Constructor: deal first hand to user
+  public User(){
+    this.addCard(hand); // 1st card
+    this.addCard(hand); // 2nd card
+    this.handsList.add(hand); // increase number of hands
+    this.numCards.set(0, 2); // total cards for this hand is 2 initially
+    this.numHands++;
+  }
   // hit function asks player which hand they want to hit, so handNumber argument is passed
   public void hit(int handNumber){
     /* addCard(arg) is method of class Hand. Whenever called, it accepts an argument type Card, and adds one card to hand (list of Card objects)*/
     if(this.numHands == 0){ // if player just starts and no hands yet
       this.addCard(hand);
       this.handsList.add(hand); // increase number of hands
-      this.numCards.add(0, 1);
+      this.numCards.set(0, 1);
       this.numHands++;
     }
     else{
