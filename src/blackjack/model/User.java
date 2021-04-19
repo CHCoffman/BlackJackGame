@@ -85,7 +85,7 @@ public class User extends Hand {
     int cardValue;
     int numAces = 0;
 
-    ArrayList<Card> wantSum = this.handsList.get(handNumber);
+    ArrayList<Card> wantSum = this.handsList.get(handNumber-1);
     cardValue = wantSum.getValue();
     if(cardValue == 1){ //Ace
       numAces++;
