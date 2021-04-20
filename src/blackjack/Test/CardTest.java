@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 class CardTest {
 	
-	Card card = new Card(5, "clubs");
+	Card card = new Card("5", "clubs");
 
 
 	@Before

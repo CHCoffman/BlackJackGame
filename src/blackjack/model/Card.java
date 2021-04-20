@@ -5,7 +5,7 @@ public class Card {
 	String suit;
 	boolean aceHigh;
 	
-	Card(String vl, String st){
+	public Card(String vl, String st){
 		this.value = vl;
 		this.suit = st;
 	}
