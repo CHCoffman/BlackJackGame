@@ -21,7 +21,7 @@ public class User extends Hand {
 
   // hit function asks player which hand they want to hit, so handNumber argument is passed
   public void hit(int handNumber){
-    /* addCard(arg) is method of class Hand. Whenever called, it accepts an argument type Card, and adds one card to hand (list of Card objects)*/
+    /* addCard(arg) is method of class Hand. Whenever called, it accepts an argument type ArrayList, and adds one card (Card object) to hand (list of Card objects)*/
     if(this.numHands == 0){ // if player just starts and no hands yet
       this.addCard(hand);
       this.handsList.add(hand); // increase number of hands
