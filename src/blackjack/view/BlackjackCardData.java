@@ -35,12 +35,6 @@ public class BlackjackCardData {
         }
     }
     public Image GetScaledInstance(Dimension dimensions) {
-        if(dimensions.width < 0 || dimensions.height < 0) {
-            return m_baseImage.getScaledInstance(1, 1, Image.SCALE_FAST);
-        }
-        else if(dimensions.width > Math.sqrt(Integer.MAX_VALUE) || dimensions.height > Math.sqrt(Integer.MAX_VALUE)) {
-            return m_baseImage.getScaledInstance(1, 1, Image.SCALE_FAST);
-        }
         return m_baseImage.getScaledInstance(dimensions.width, dimensions.height, Image.SCALE_FAST);
     }
     private void LoadInvalidCard() {

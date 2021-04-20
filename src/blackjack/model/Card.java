@@ -1,4 +1,8 @@
 package blackjack.model;
+<<<<<<< HEAD
+=======
+
+>>>>>>> CCTest
 
 public class Card {
 	int value;
