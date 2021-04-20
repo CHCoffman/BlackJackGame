@@ -1,3 +1,5 @@
+package blackjack.model;
+
 public class Card {
 	String value;
 	String suit;
