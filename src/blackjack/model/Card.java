@@ -1,15 +1,14 @@
-package blackjack.model;
-
 public class Card {
-	int value;
+	String value;
 	String suit;
+	boolean aceHigh;
 	
-	public Card(int vl, String st){
+	Card(String vl, String st){
 		this.value = vl;
 		this.suit = st;
 	}
 	
-	public int getValue() {
+	public String getValue() {
 		return this.value;
 	}
 	
