@@ -10,20 +10,29 @@ public class User extends Hand {
   private ArrayList<ArrayList<Card>> handsList = new ArrayList<ArrayList<Card>>(); // list of hands the user has
   private ArrayList<Integer> numCards = new ArrayList<Integer>(); // numCards stores total cards for each hand
 
+  //Constructor: deal first hand to user
+  public User(){
+    this.addCard(hand); // 1st card
+    this.addCard(hand); // 2nd card
+    this.handsList.add(hand); // increase number of hands
+    this.numCards.set(0, 2); // total cards for this hand is 2 initially
+    this.numHands++;
+  }
+
   // hit function asks player which hand they want to hit, so handNumber argument is passed
   public void hit(int handNumber){
     /* addCard(arg) is method of class Hand. Whenever called, it accepts an argument type Card, and adds one card to hand (list of Card objects)*/
     if(this.numHands == 0){ // if player just starts and no hands yet
       this.addCard(hand);
       this.handsList.add(hand); // increase number of hands
-      this.numCards.add(0, 1);
+      this.numCards.set(0, 1);
       this.numHands++;
     }
     else{
-      this.addCard(handsList.get(handNumber)); // add one card to the hand that player chooses to hit
-      int totalForCurHand = this.numCards.get(handNumber);
+      this.addCard(handsList.get(handNumber-1)); // add one card to the hand that player chooses to hit
+      int totalForCurHand = this.numCards.get(handNumber-1);
       totalForCurHand++;
-      this.numCards.set(handNumber, totalForCurHand); //increment total cards in current hand
+      this.numCards.set(handNumber-1, totalForCurHand); //increment total cards in current hand
     }
 
   }
@@ -37,9 +46,9 @@ public class User extends Hand {
   // Pass handNumber argument to indicate which hand the player wants to double down.
   public void doubleDown(int handNumber){
     // Check if hand has 2 cards
-    ArrayList<Card> wantToDB = handsList.get(handNumber);
+    ArrayList<Card> wantToDB = handsList.get(handNumber-1);
     if(wantToDB.size() == 2){
-      hit(handNumber); // Receive 1 more card for that hand
+      hit(handNumber-1); // Receive 1 more card for that hand
       System.out.println("\nDoubled down. Can no longer draw more cards\n");
     }
     else{
@@ -52,15 +61,15 @@ public class User extends Hand {
   public void split(int handNumber){
     /* getValue() is a method of class Hand. It returns one integer, representing card value ranging from "A" to "K" (Ex: returns 1 meaning "Ace").
      */
-    ArrayList<Card> wantToSplit = this.handsList.get(handNumber); 
+    ArrayList<Card> wantToSplit = this.handsList.get(handNumber-1);
     // If the hand the player wants to split has exaclty 2 cards, and they have the same value (ex: "2" and "2"), then the hand can split
     if (wantToSplit.size() == 2 && (wantToSplit.get(0).getValue() == wantToSplit.get(1).getValue())){
       ArrayList<Card> split = new ArrayList<Card>();
       split.add(0, wantToSplit.get(0)); // assign the first card of current hand to the split hand
       wantToSplit.remove(0);  // remove the first card of current hand
-      int totalForCurHand = this.numCards.get(handNumber); 
+      int totalForCurHand = this.numCards.get(handNumber-1);
       totalForCurHand--;
-      this.numCards.set(handNumber, totalForCurHand); //decrement total cards in current hand
+      this.numCards.set(handNumber-1, totalForCurHand); //decrement total cards in current hand
       this.numHands++; // increment total of hands user has. split hand is the latest one
       this.numCards.add(1); // add 1 to total cards in split hand
     }
@@ -76,7 +85,7 @@ public class User extends Hand {
     int cardValue;
     int numAces = 0;
 
-    ArrayList<Card> wantSum = this.handsList.get(handNumber);
+    ArrayList<Card> wantSum = this.handsList.get(handNumber-1);
     cardValue = wantSum.getValue();
     if(cardValue == 1){ //Ace
       numAces++;
