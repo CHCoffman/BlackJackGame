@@ -1,5 +1,5 @@
 package blackjack.controller;
-import blackjack.model.*; // .whatevermodelclass
+import blackjack.model.*; 
 import blackjack.view.*;
 
 public abstract class AbstractController implements Controller {

@@ -15,6 +15,11 @@ class DeckTest {
 	{	
 	}
 	
+	@Test
+	public void testDeckCreated() throws Exception{
+		
+	}
+	
 	@After
 	public void tearDown() throws Exception 
 	{
