@@ -75,7 +75,7 @@ public class User extends Hand {
     }
   }
 
-  public void fold(){
+  public static void fold(){
     System.out.println("\nYou surrender\n");
   }
 

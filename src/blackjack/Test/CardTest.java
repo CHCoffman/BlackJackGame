@@ -26,7 +26,7 @@ class CardTest {
 	
 	@Test
 	public void testCardValue() throws Exception{
-		assertEquals(card.getValue(), 5);
+		assertEquals(card.getValue(), "5");
 	}
 	
 	@Test

@@ -9,7 +9,7 @@ public class Deck {
 	private static
 		ArrayList<Card> deck = new ArrayList<Card>();
 	
-	Deck() {
+	public Deck() {
 		String suit[] = {"Spades", "Clubs", "Diamonds", "Spades"};
 		String values[] = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
 		
