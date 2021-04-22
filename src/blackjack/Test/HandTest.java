@@ -11,6 +11,7 @@ import blackjack.model.Hand;
 class HandTest {
 
 	Hand hand = new Hand();
+	
 	@Before
 	public void setUp() throws Exception 
 	{	
@@ -19,10 +20,14 @@ class HandTest {
 	public void testHandCreated() throws Exception{
 		assertNotNull(hand);
 	}
-	
+	@Test
+	public void testSumValues() throws Exception{
+		assertNotNull(hand.sumValues());
+	}	
 	@After
 	public void tearDown() throws Exception 
 	{
+		hand = null;
 		System.gc();
 	}
 }

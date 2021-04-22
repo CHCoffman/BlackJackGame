@@ -16,6 +16,7 @@ import junit.framework.Assert;
 
 
 class DeckTest {
+	@SuppressWarnings("unused")
 	private final PrintStream standardOut = System.out;
 	private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
@@ -41,6 +42,7 @@ class DeckTest {
 	@After
 	public void tearDown() throws Exception 
 	{
+		deck = null;
 		System.gc();
 	}
 

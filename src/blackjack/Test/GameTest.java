@@ -28,6 +28,7 @@ class GameTest {
 	@After
 	public void tearDown() throws Exception 
 	{
+		game = null;
 		System.gc();
 	}
 }

@@ -36,6 +36,7 @@ class UserTest {
 	}
 	@Test
 	public void testAddWins() throws Exception{
+		assertEquals(0, user.getWins());
 		user.addWins();
 		assertEquals(1, user.getWins());
 	}
@@ -43,9 +44,14 @@ class UserTest {
 	public void testSplit() throws Exception{
 		user.split(3);
 	}
+	@Test
+	public void testDetermineWin() throws Exception{
+		//TODO test handsum 21, dealer 21, user less than or above
+	}
 	@After
 	public void tearDown() throws Exception 
 	{
+		user = null;
 		System.gc();
 	}
 
