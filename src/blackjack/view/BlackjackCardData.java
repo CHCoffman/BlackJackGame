@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.Buffer;
-
+import blackjack.model.Card;
 public class BlackjackCardData {
     private static final String FilePathBase = "Resources\\Cards\\PNG\\";
     private int m_cardNumber = -1;
