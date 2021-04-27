@@ -1,13 +1,16 @@
+package blackjack.model;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+@SuppressWarnings("unused")
 public class Deck {
 	private static
 		ArrayList<Card> deck = new ArrayList<Card>();
 	
-	Deck() {
+	public Deck() {
 		String suit[] = {"Spades", "Clubs", "Diamonds", "Hearts"};
 		String values[] = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
 		
@@ -67,7 +70,7 @@ public class Deck {
 	/**
 	 * Simply displays suits and values of all cards in deck
 	 */
-	public void Display() {
+	public static void Display() {
 		for(Card c : deck) {
 			System.out.println(c.getValue() + " of " + c.getSuit());
 		}
