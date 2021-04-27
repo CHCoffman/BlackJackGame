@@ -22,39 +22,25 @@ public class Deck {
 		}
 		// INITIALIZATION
 	}
-	
+
 	/**
-	 * 
+	 * Shuffles a given deck and returns a new deck in a random order
 	 * @param deck the deck that is to be shuffled
 	 */
 	public ArrayList<Card> shuffle(ArrayList<Card> deck) {
-		// SHUFFLE DECK
-		Card[] cardArray = new Card[deck.size()];
-		Card tmp = null;
-		int index;
-		int i, j;
+		List<Card> cardList = new ArrayList<Card>();   //Creates a List of type Card (because Collections.shuffle() does not work for ArrayLists)
+		ArrayList<Card> temp = new ArrayList<Card>();
 		
-		Random rand = new Random();
+		for(Card c : deck) {   // Load contents of deck ArrayList into List
+			cardList.add(c);
+		}
+		Collections.shuffle(cardList);
 		
-		for(i = 0; i < cardArray.length; i++) {
-			j = i + rand.nextInt(50 - i);
-			
-			tmp = cardArray[i];
-			cardArray[j] = cardArray[i];
-			cardArray[i] = tmp;
-			
+		for(Card c : cardList) {  // Load contents of new List into our new ArrayList
+			temp.add(c);
 		}
 		
-		
-			
-		
-		
-		ArrayList<Card> tempList = new ArrayList<Card>(Arrays.asList(cardArray));
-		
-		for(Card c : deck) {
-			System.out.println(c.getValue() + " of " + c.getSuit());
-		}
-		return tempList;
+		return temp;
 	}
 	
 	/**
