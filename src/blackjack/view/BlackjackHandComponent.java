@@ -27,54 +27,48 @@ public class BlackjackHandComponent extends JPanel {
         if(m_curCardIndex == m_cards.length) {
             return false;
         }
-        try {
-            BlackjackCardView v = BlackjackDeckDataStore.GetCard(suite, number, new Dimension(100, 150));
-            BlackjackCardComponent cardComponent = new BlackjackCardComponent(v);
-            int thisCardIndex = m_curCardIndex;
-            m_cards[m_curCardIndex] = cardComponent;
-            m_cards[m_curCardIndex].addMouseListener(new MouseListener() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
+        BlackjackCardView v = BlackjackDeckDataStore.GetCard(suite, number, new Dimension(100, 150));
+        BlackjackCardComponent cardComponent = new BlackjackCardComponent(v);
+        int thisCardIndex = m_curCardIndex;
+        m_cards[m_curCardIndex] = cardComponent;
+        m_cards[m_curCardIndex].addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
 
-                }
+            }
 
-                @Override
-                public void mousePressed(MouseEvent e) {
+            @Override
+            public void mousePressed(MouseEvent e) {
 
-                }
+            }
 
-                @Override
-                public void mouseReleased(MouseEvent e) {
+            @Override
+            public void mouseReleased(MouseEvent e) {
 
-                }
+            }
 
-                @Override
-                public void mouseEntered(MouseEvent e) {
-                    BlackjackCardView view = m_cards[thisCardIndex].GetView();
-                    view.Scale(new Dimension((int)(view.GetDimensions().width * 1.2), (int)(view.GetDimensions().height * 1.2)));
-                    m_cards[thisCardIndex].SetView(view);
-                    m_cards[thisCardIndex].setIcon(new ImageIcon(view.GetImage()));
-                    m_cards[thisCardIndex].setBorder(BorderFactory.createLineBorder(Color.yellow, 2));
-                }
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                BlackjackCardView view = m_cards[thisCardIndex].GetView();
+                view.Scale(new Dimension((int)(view.GetDimensions().width * 1.2), (int)(view.GetDimensions().height * 1.2)));
+                m_cards[thisCardIndex].SetView(view);
+                m_cards[thisCardIndex].setIcon(new ImageIcon(view.GetImage()));
+                m_cards[thisCardIndex].setBorder(BorderFactory.createLineBorder(Color.yellow, 2));
+            }
 
-                @Override
-                public void mouseExited(MouseEvent e) {
-                    BlackjackCardView view  = m_cards[thisCardIndex].GetView();
-                    view.Scale(m_originalCardSize);
-                    m_cards[thisCardIndex].SetView(view);
-                    m_cards[thisCardIndex].setIcon(new ImageIcon(view.GetImage()));
-                    m_cards[thisCardIndex].setBorder(BorderFactory.createEmptyBorder());
-                }
-            });
+            @Override
+            public void mouseExited(MouseEvent e) {
+                BlackjackCardView view  = m_cards[thisCardIndex].GetView();
+                view.Scale(m_originalCardSize);
+                m_cards[thisCardIndex].SetView(view);
+                m_cards[thisCardIndex].setIcon(new ImageIcon(view.GetImage()));
+                m_cards[thisCardIndex].setBorder(BorderFactory.createEmptyBorder());
+            }
+        });
 
-            add(cardComponent);
-            m_curCardIndex++;
-            return true;
-        }
-        catch(BlackjackDeckDataStoreException e) {
-            add(new BlackjackCardComponent(BlackjackDeckDataStore.GetInvalidCard(new Dimension(100, 150))));
-            return false;
-        }
+        add(cardComponent);
+        m_curCardIndex++;
+        return true;
     }
     public void SetCard(BlackjackCardComponent v, int index) {
         if(m_cards[index] != null) {

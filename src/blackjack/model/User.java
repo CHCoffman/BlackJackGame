@@ -16,7 +16,7 @@ public class User extends Deck{
     this.numCards.set(0, 2); // total cards for this hand is 2 initially
     this.numHands++;
   }
-
+  
   public void addCard(int handNumber)
   {
     Card aCard = deal(); // deal() is method of class Deck
@@ -29,6 +29,7 @@ public class User extends Deck{
         handsList.get(handNumber-1).add(aCard);
     }
   }
+  // precondition to hit: User has at least 1 hand
   // hit function asks player which hand they want to hit, so handNumber argument is passed
   public void hit(int handNumber){
       this.addCard(handNumber); // add one card to the hand that player chooses to hit
@@ -76,7 +77,7 @@ public class User extends Deck{
     }
   }
 
-  public void fold(){
+  public static void fold(){
     System.out.println("\nYou surrender\n");
   }
 
