@@ -7,19 +7,22 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
+import blackjack.model.Card;
 import blackjack.model.User;
 
 // TODO need to test User once it is set up
 class UserTest {
-	User user = new User();
+	Card card = new Card("5", "aces");
+	User user ;
 
 	@Before
 	public void setUp() throws Exception 
 	{		
-		User user;
+		User user = new User(card);
 	}
 	@Test
 	public void testUserCreated() throws Exception{
+		
 		assertNotNull(user);
 	}
 	@Test
@@ -33,6 +36,7 @@ class UserTest {
 	@Test
 	public void testStand() throws Exception{
 		user.stand();
+		assertEquals(0,0);
 	}
 	@Test
 	public void testAddWins() throws Exception{
@@ -43,6 +47,7 @@ class UserTest {
 	@Test
 	public void testSplit() throws Exception{
 		user.split(3);
+		assertEquals(0,0);
 	}
 	@Test
 	public void testDetermineWin() throws Exception{
