@@ -3,37 +3,38 @@ package blackjack.model;
 import java.util.ArrayList;
 import java.util.*;
 
-public class User extends Hand {
+public class User extends Deck{
   private int wins = 0;
   private int numHands = 0;
-  private ArrayList<Card> hand = new ArrayList<Card>(); // hand variable is array of Card objects
   private ArrayList<ArrayList<Card>> handsList = new ArrayList<ArrayList<Card>>(); // list of hands the user has
   private ArrayList<Integer> numCards = new ArrayList<Integer>(); // numCards stores total cards for each hand
 
   //Constructor: deal first hand to user
-  public User(){
-    this.addCard(hand); // 1st card
-    this.addCard(hand); // 2nd card
-    this.handsList.add(hand); // increase number of hands
+  public User(Card aCard){
+    this.addCard(1); // 1st card
+    this.addCard(1); // 2nd card
     this.numCards.set(0, 2); // total cards for this hand is 2 initially
     this.numHands++;
   }
 
-  // hit function asks player which hand they want to hit, so handNumber argument is passed
-  public void hit(int handNumber){
-    /* addCard(arg) is method of class Hand. Whenever called, it accepts an argument type Card, and adds one card to hand (list of Card objects)*/
-    if(this.numHands == 0){ // if player just starts and no hands yet
-      this.addCard(hand);
-      this.handsList.add(hand); // increase number of hands
-      this.numCards.set(0, 1);
-      this.numHands++;
+  public void addCard(int handNumber)
+  {
+    Card aCard = deal(); // deal() is method of class Deck
+    if(handsList.size() == 0){
+        ArrayList<Card> hand = new ArrayList<Card>();
+        hand.add(aCard);
+        handsList.add(hand);
     }
     else{
-      this.addCard(handsList.get(handNumber-1)); // add one card to the hand that player chooses to hit
+        handsList.get(handNumber-1).add(aCard);
+    }
+  }
+  // hit function asks player which hand they want to hit, so handNumber argument is passed
+  public void hit(int handNumber){
+      this.addCard(handNumber); // add one card to the hand that player chooses to hit
       int totalForCurHand = this.numCards.get(handNumber-1);
       totalForCurHand++;
       this.numCards.set(handNumber-1, totalForCurHand); //increment total cards in current hand
-    }
 
   }
 
@@ -48,7 +49,7 @@ public class User extends Hand {
     // Check if hand has 2 cards
     ArrayList<Card> wantToDB = handsList.get(handNumber-1);
     if(wantToDB.size() == 2){
-      hit(handNumber-1); // Receive 1 more card for that hand
+      hit(handNumber); // Receive 1 more card for that hand
       System.out.println("\nDoubled down. Can no longer draw more cards\n");
     }
     else{
