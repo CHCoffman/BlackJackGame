@@ -15,6 +15,13 @@ public class Hand {
 	String choice;
 	
 	/**
+	 * @return the local hand function
+	 */
+	public ArrayList<Card> getHand(){
+		return hand;
+	}
+	
+	/**
 	 * Transfers a new card from the main deck to the player's hand.
 	 * @param deck the main deck that cards will be taken from
 	 */
