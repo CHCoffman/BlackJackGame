@@ -30,10 +30,6 @@ class UserTest {
 		User.fold();
 	}
 	@Test
-	public void testGetHand() throws Exception{
-		//User.getHandSum(3);
-	}
-	@Test
 	public void testStand() throws Exception{
 		user.stand();
 		assertEquals(0,0);
