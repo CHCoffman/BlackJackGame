@@ -1,5 +1,3 @@
-package blackjack.model;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -9,8 +7,8 @@ public class Deck {
 	private static
 		ArrayList<Card> deck = new ArrayList<Card>();
 	
-	public Deck() {
-		String suit[] = {"Spades", "Clubs", "Diamonds", "Spades"};
+	Deck() {
+		String suit[] = {"Spades", "Clubs", "Diamonds", "Hearts"};
 		String values[] = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
 		
 		
@@ -22,35 +20,65 @@ public class Deck {
 		// INITIALIZATION
 	}
 	
-//	public static void Shuffle(ArrayList<Card> deck) {
-//		// SHUFFLE DECK
-//		Card[] array = new Card[deck.size()];
-//		List<Integer> positions = new ;
-//		int[] positions = new int[deck.size()];
-//		int index;
-//		int i = 0;
-//		Random rand = null;
-//		
-//		for(Card c : deck) {
-//			index = rand.nextInt((deck.size() - 0) + 1) + 0;
-//			array[index] = c;
-//			positions[i] = index;
-//			i++;
-//		}
-//		
-//		
-//		
-//		List<Card> tempList = new ArrayList<Card>(Arrays.asList(array));
-//	}
-//	
-	
-	public static void Deal() {
+	/**
+	 * 
+	 * @param deck the deck that is to be shuffled
+	 */
+	public ArrayList<Card> shuffle(ArrayList<Card> deck) {
+		// SHUFFLE DECK
+		Card[] cardArray = new Card[deck.size()];
+		Card tmp = null;
+		int index;
+		int i, j;
 		
-	}
-	
-	public static void Display() {
+		Random rand = new Random();
+		
+		for(i = 0; i < cardArray.length; i++) {
+			j = i + rand.nextInt(50 - i);
+			
+			tmp = cardArray[i];
+			cardArray[j] = cardArray[i];
+			cardArray[i] = tmp;
+			
+		}
+		
+		
+			
+		
+		
+		ArrayList<Card> tempList = new ArrayList<Card>(Arrays.asList(cardArray));
+		
 		for(Card c : deck) {
 			System.out.println(c.getValue() + " of " + c.getSuit());
 		}
+		return tempList;
+	}
+	
+	/**
+	 * Removes and returns the first card in deck to be sent to a hand
+	 * @return the card to be dealt
+	 */
+	public Card deal() {
+		Card dealtCard = deck.get(0);
+		deck.remove(0);
+		return dealtCard;
+	}
+	
+	/**
+	 * Simply displays suits and values of all cards in deck
+	 */
+	public void Display() {
+		for(Card c : deck) {
+			System.out.println(c.getValue() + " of " + c.getSuit());
+		}
+	}
+	
+	
+	public ArrayList<Card> getDeck(){
+		return Deck.deck;
+	}
+	
+	public void setDeck(ArrayList<Card> deckArg) {
+		deck = deckArg;
 	}
 }
