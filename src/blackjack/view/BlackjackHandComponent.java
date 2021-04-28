@@ -1,5 +1,6 @@
 package blackjack.view;
 
+import blackjack.model.Card;
 import blackjack.view.ViewExceptions.BlackjackDeckDataStoreException;
 
 import javax.swing.*;
@@ -23,11 +24,11 @@ public class BlackjackHandComponent extends JPanel {
         setMaximumSize(componentSize);
         setPreferredSize(componentSize);
     }
-    public boolean AddCard(int number, BlackjackCardData.CardSuite suite) {
+    public boolean AddCard(Card c) {
         if(m_curCardIndex == m_cards.length) {
             return false;
         }
-        BlackjackCardView v = BlackjackDeckDataStore.GetCard(suite, number, new Dimension(100, 150));
+        BlackjackCardView v = BlackjackDeckDataStore.GetCard(c, new Dimension(100, 150));
         BlackjackCardComponent cardComponent = new BlackjackCardComponent(v);
         int thisCardIndex = m_curCardIndex;
         m_cards[m_curCardIndex] = cardComponent;
@@ -49,20 +50,10 @@ public class BlackjackHandComponent extends JPanel {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                BlackjackCardView view = m_cards[thisCardIndex].GetView();
-                view.Scale(new Dimension((int)(view.GetDimensions().width * 1.2), (int)(view.GetDimensions().height * 1.2)));
-                m_cards[thisCardIndex].SetView(view);
-                m_cards[thisCardIndex].setIcon(new ImageIcon(view.GetImage()));
-                m_cards[thisCardIndex].setBorder(BorderFactory.createLineBorder(Color.yellow, 2));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                BlackjackCardView view  = m_cards[thisCardIndex].GetView();
-                view.Scale(m_originalCardSize);
-                m_cards[thisCardIndex].SetView(view);
-                m_cards[thisCardIndex].setIcon(new ImageIcon(view.GetImage()));
-                m_cards[thisCardIndex].setBorder(BorderFactory.createEmptyBorder());
             }
         });
 
@@ -93,19 +84,10 @@ public class BlackjackHandComponent extends JPanel {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                BlackjackCardView view = m_cards[index].GetView();
-                m_originalCardSize = view.GetDimensions();
-                view.Scale(new Dimension((int)(view.GetDimensions().width * 1.2), (int)(view.GetDimensions().height * 1.2)));
-                m_cards[index].SetView(view);
-                m_cards[index].setIcon(new ImageIcon(view.GetImage()));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                BlackjackCardView view  = m_cards[index].GetView();
-                view.Scale(m_originalCardSize);
-                m_cards[index].SetView(view);
-                m_cards[index].setIcon(new ImageIcon(view.GetImage()));
             }
         });
         add(m_cards[index]);

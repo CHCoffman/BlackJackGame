@@ -9,20 +9,13 @@ import java.nio.Buffer;
 import blackjack.model.Card;
 public class BlackjackCardData {
     private static final String FilePathBase = "Resources\\Cards\\PNG\\";
-    private int m_cardNumber = -1;
-    private CardSuite m_cardSuite = CardSuite.INVALID;
-    public enum CardSuite {
-        CLUBS,
-        SPADES,
-        DIAMONDS,
-        HEARTS,
-        INVALID,
-    }
+    private Card m_cardBase;
     private Image m_baseImage = null;
-    public BlackjackCardData(int num, CardSuite suite) {
-        String fileSourcePath = FilePathBase + ConvertCardNumToString(num) + ConvertSuiteToChar(suite) + ".png";
+    public BlackjackCardData(Card card) {
+        m_cardBase = card;
+        String fileSourcePath = FilePathBase + ConvertCardToFilename(card);
         try {
-            if(suite == CardSuite.INVALID) {
+            if(m_cardBase.getSuit().equals("INVALID")) {
                 LoadInvalidCard();
             }
             else {
@@ -48,15 +41,20 @@ public class BlackjackCardData {
         invalidImg.setRGB(0, 0, Color.MAGENTA.getRGB());
         m_baseImage = invalidImg;
     }
-    private char ConvertSuiteToChar(CardSuite s) {
-        switch(s) {
-            case CLUBS: return 'C';
-            case SPADES: return 'S';
-            case HEARTS: return 'H';
-            case DIAMONDS: return 'D';
-            default: return '\0';
-        }
+    private String ConvertCardToFilename(Card card) {
+        return card.getValue() + ConvertSuitToFilePart(card.getSuit()) + ".png";
     }
+    private String ConvertSuitToFilePart(String suit) {
+        switch(suit) {
+            case "Clubs": return "C";
+            case "Hearts": return "H";
+            case "Diamonds": return "D";
+            case "Spades": return "S";
+        }
+        return "INVALID";
+    }
+    /*
+
     private String ConvertCardNumToString(int num) {
         if(num <= 0 || num >= 14) {
             return "";
@@ -74,4 +72,5 @@ public class BlackjackCardData {
         }
         return "";
     }
+     */
 }

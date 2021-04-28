@@ -2,7 +2,11 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <excludeFromCompile>
+      <file url="file://$PROJECT_DIR$/src/blackjack/model/Game.java" />
       <file url="file://$PROJECT_DIR$/src/blackjack/model/User.java" />
+      <file url="file://$PROJECT_DIR$/src/blackjack/Test/UserTest.java" />
+      <file url="file://$PROJECT_DIR$/src/blackjack/Test/GameTest.java" />
+      <file url="file://$PROJECT_DIR$/src/blackjack/Test/CombinedTest.java" />
     </excludeFromCompile>
   </component>
 </project>

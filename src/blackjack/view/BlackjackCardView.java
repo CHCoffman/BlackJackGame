@@ -1,17 +1,17 @@
 package blackjack.view;
 
+import blackjack.model.Card;
+
 import java.awt.*;
 import java.awt.image.ImageObserver;
 
 public class BlackjackCardView {
     private Image m_data = null;
-    private int m_cardNumber = -1;
     private Dimension m_viewDimensions = new Dimension();
-    private BlackjackCardData.CardSuite m_suite = BlackjackCardData.CardSuite.INVALID;
-    public BlackjackCardView(Image image, int num, BlackjackCardData.CardSuite suite) {
+    private Card m_card;
+    public BlackjackCardView(Image image, Card card) {
         m_data = image;
-        m_cardNumber = num;
-        m_suite = suite;
+        m_card = card;
         m_viewDimensions.width = m_data.getWidth(new ImageObserver() {
             @Override
             public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
@@ -37,6 +37,6 @@ public class BlackjackCardView {
     }
     @Override
     public String toString() {
-        return String.valueOf(m_cardNumber) + " of " + m_suite.name();
+        return m_card.toString();
     }
 }

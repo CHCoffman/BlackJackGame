@@ -1,6 +1,8 @@
 package blackjack.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import blackjack.model.Card;
 import blackjack.view.BlackjackCardData;
 import blackjack.view.BlackjackCardView;
 import blackjack.view.BlackjackDeckDataStore;
@@ -11,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import java.awt.*;
 
 public class BlackjackCardViewTests {
-    BlackjackCardView testView = BlackjackDeckDataStore.GetCard(BlackjackCardData.CardSuite.HEARTS, 1, new Dimension(100, 150));
+    BlackjackCardView testView = BlackjackDeckDataStore.GetCard(new Card("A", "Clubs"), new Dimension(100, 150));
     @BeforeClass
     public static void InitializeDataStore() {
         BlackjackDeckDataStore.Initialize();
