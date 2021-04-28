@@ -1,4 +1,5 @@
 package blackjack.Test;
+import blackjack.model.Card;
 import blackjack.view.*;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.After;
@@ -9,7 +10,7 @@ import java.awt.*;
 import java.awt.image.ImageObserver;
 
 public class BlackjackCardDataTest {
-    BlackjackCardData testCase = new BlackjackCardData(1, BlackjackCardData.CardSuite.HEARTS);
+    BlackjackCardData testCase = new BlackjackCardData(new Card("2", "Hearts"));
     @Before
     public void InitializeDataStore() {
         BlackjackDeckDataStore.Initialize();

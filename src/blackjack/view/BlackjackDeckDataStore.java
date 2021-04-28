@@ -1,4 +1,5 @@
 package blackjack.view;
+import blackjack.model.Card;
 import blackjack.view.BlackjackCardData;
 import blackjack.view.ViewExceptions.BlackjackDeckDataStoreException;
 
@@ -12,17 +13,17 @@ public class BlackjackDeckDataStore {
     private static final int SUITE_SPADES_OFFSET = 39;
     private static final int INVALID_CARD_INDEX = m_cardData.length-1;
     public static void Initialize() {
-        GenerateData(BlackjackCardData.CardSuite.CLUBS);
-        GenerateData(BlackjackCardData.CardSuite.HEARTS);
-        GenerateData(BlackjackCardData.CardSuite.DIAMONDS);
-        GenerateData(BlackjackCardData.CardSuite.SPADES);
-        m_cardData[INVALID_CARD_INDEX] = new BlackjackCardData(-1, BlackjackCardData.CardSuite.INVALID);
+        GenerateData("Clubs");
+        GenerateData("Hearts");
+        GenerateData("Diamonds");
+        GenerateData("Spades");
+        m_cardData[INVALID_CARD_INDEX] = new BlackjackCardData(new Card("INVALID", "INVALID"));
     }
-    private static void GenerateData(BlackjackCardData.CardSuite suite) {
+    private static void GenerateData(String suite) {
         int offset = GetBufferOffsetOfSuite(suite);
         // Load images into buffer
         for(int i = 1; i < 14; i ++) {
-            m_cardData[i + offset - 1] = new BlackjackCardData(i, suite);
+            m_cardData[i + offset - 1] = new BlackjackCardData(new Card(GetCardValFromInt(i), suite));
         }
     }
     public static BlackjackCardView GetInvalidCard(Dimension viewDimensions) {
@@ -30,24 +31,63 @@ public class BlackjackDeckDataStore {
             System.out.println("Invalid dimensions " + viewDimensions.height + "x" + viewDimensions.height + " passed to GetInvalidCard");
             viewDimensions = new Dimension(1, 1);
         }
-        return new BlackjackCardView(m_cardData[INVALID_CARD_INDEX].GetScaledInstance(viewDimensions), -1, BlackjackCardData.CardSuite.INVALID);
+        return new BlackjackCardView(m_cardData[INVALID_CARD_INDEX].GetScaledInstance(viewDimensions), new Card("INVALID", "INVALID"));
     }
-    public static BlackjackCardView GetCard(BlackjackCardData.CardSuite suite, int num, Dimension viewDimensions) {
-        int offset = GetBufferOffsetOfSuite(suite);
-        int location = num + offset - 1;
+    public static BlackjackCardView GetCard(Card c, Dimension viewDimensions) {
+        int offset = GetBufferOffsetOfSuite(c.getSuit());
+        int location = -1;
+        try {
+            location = Integer.parseInt(c.getValue()) + offset - 1;
+        } catch(NumberFormatException e) {
+            location = 1;
+        }
         if(location < 0 || location >= 52 || offset == -1) {
-            System.out.println("Invalid card " + num + " of " + suite.name() + " passed in BlackjackDeckDataStore.GetCard");
+            System.out.println("Invalid card " + c.getValue() + " of " + c.getSuit() + " passed in BlackjackDeckDataStore.GetCard");
             return GetInvalidCard(viewDimensions);
         }
-        return new BlackjackCardView(m_cardData[num + GetBufferOffsetOfSuite(suite)-1].GetScaledInstance(viewDimensions), num, suite);
-    }
-    private static int GetBufferOffsetOfSuite(BlackjackCardData.CardSuite suite) {
-        switch(suite) {
-            case CLUBS: return SUITE_CLUBS_OFFSET;
-            case HEARTS: return SUITE_HEARTS_OFFSET;
-            case DIAMONDS: return SUITE_DIAMONDS_OFFSET;
-            case SPADES: return SUITE_SPADES_OFFSET;
-            default: assert false; return -1;
+        int index = GetIntFromCardVal(c.getValue()) + GetBufferOffsetOfSuite(c.getSuit())-1;
+        if(index < 0 || index > 52) {
+            return GetInvalidCard(viewDimensions);
         }
+        return new BlackjackCardView(m_cardData[GetIntFromCardVal(c.getValue()) + GetBufferOffsetOfSuite(c.getSuit())-1].GetScaledInstance(viewDimensions), c);
+    }
+    private static int GetBufferOffsetOfSuite(String suite) {
+        switch(suite) {
+            case "Spades": return SUITE_SPADES_OFFSET;
+            case "Clubs":   return SUITE_CLUBS_OFFSET;
+            case "Diamonds": return SUITE_DIAMONDS_OFFSET;
+            case "Hearts": return SUITE_HEARTS_OFFSET;
+            default: return Integer.MAX_VALUE; // Force invalid card
+        }
+    }
+    private static int GetIntFromCardVal(String val) {
+        switch(val) {
+            case "2": return 2;
+            case "3": return 3;
+            case "4": return 4;
+            case "5": return 5;
+            case "6": return 6;
+            case "7": return 7;
+            case "8": return 8;
+            case "9": return 9;
+            case "10": return 10;
+            case "J": return 11;
+            case "Q": return 12;
+            case "K": return 13;
+            case "A": return 1;
+        }
+        return Integer.MAX_VALUE; // Force invalid card
+    }
+    private static String GetCardValFromInt(int val) {
+        if(val <= 10 && val > 1) {
+            return Integer.toString(val);
+        }
+        switch(val) {
+            case 1: return "A";
+            case 11: return "J";
+            case 12: return "Q";
+            case 13: return "K";
+        }
+        return "INVALID";
     }
 }

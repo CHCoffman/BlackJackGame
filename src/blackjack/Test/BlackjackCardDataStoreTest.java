@@ -1,4 +1,5 @@
 package blackjack.Test;
+import blackjack.model.Card;
 import blackjack.view.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -36,17 +37,27 @@ public class BlackjackCardDataStoreTest {
     }
     @Test
     public void TestCardNumberBase() {
-        BlackjackCardView view = BlackjackDeckDataStore.GetCard(BlackjackCardData.CardSuite.HEARTS, 1, new Dimension(1, 1));
+        BlackjackCardView view = BlackjackDeckDataStore.GetCard(new Card("2", "Hearts"), new Dimension(1, 1));
         assertNotNull(view);
     }
     @Test
     public void TestCardNumberNegative() {
-        BlackjackCardView view = BlackjackDeckDataStore.GetCard(BlackjackCardData.CardSuite.HEARTS, -1, new Dimension(1, 1));
+        BlackjackCardView view = BlackjackDeckDataStore.GetCard(new Card("-1", "Hearts"), new Dimension(1, 1));
         assertNotNull(view);
     }
     @Test
     public void TestCardNumberMax() {
-        BlackjackCardView view = BlackjackDeckDataStore.GetCard(BlackjackCardData.CardSuite.HEARTS, Integer.MAX_VALUE, new Dimension(1, 1));
+        BlackjackCardView view = BlackjackDeckDataStore.GetCard(new Card("999999999999999999999999", "Hearts"), new Dimension(1, 1));
+        assertNotNull(view);
+    }
+    @Test
+    public void TestInvalidSuit() {
+        BlackjackCardView view = BlackjackDeckDataStore.GetCard(new Card("2", "a"), new Dimension(1, 1));
+        assertNotNull(view);
+    }
+    @Test
+    public void TestInvalidCard() {
+        BlackjackCardView view = BlackjackDeckDataStore.GetCard(new Card("abcdef", "a"), new Dimension(1, 1));
         assertNotNull(view);
     }
 }
