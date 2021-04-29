@@ -64,7 +64,7 @@ public class User extends Deck{
     /* getValue() is a method of class Hand. It returns one integer, representing card value ranging from "A" to "K" (Ex: returns 1 meaning "Ace").
      */
     ArrayList<Card> wantToSplit = this.handsList.get(handNumber-1);
-    // If the hand the player wants to split has exaclty 2 cards, and they have the same value (ex: "2" and "2"), then the hand can split
+    // If the hand the player wants to split has exactly 2 cards, and they have the same value (ex: "2" and "2"), then the hand can split
     if (wantToSplit.size() == 2 && (wantToSplit.get(0).getValue() == wantToSplit.get(1).getValue())){
       ArrayList<Card> split = new ArrayList<Card>();
       split.add(0, wantToSplit.get(0)); // assign the first card of current hand to the split hand
