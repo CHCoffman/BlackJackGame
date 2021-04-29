@@ -1,25 +1,18 @@
-package blackjack.model;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Hand {
 	ArrayList<Card> hand = new ArrayList<Card>();
 	String[] royals = {"J", "Q", "K"};      
 	Scanner sc = new Scanner(System.in);
+	Random rand = new Random();
 	List<String> rList = Arrays.asList(royals);
 	int sum;
 	int numAces = 0;
 	String choice;
-	
-	/**
-	 * @return the local hand function
-	 */
-	public ArrayList<Card> getHand(){
-		return hand;
-	}
 	
 	/**
 	 * Transfers a new card from the main deck to the player's hand.
@@ -32,22 +25,39 @@ public class Hand {
 			numAces++;
 	}
 	
+	
+	/**
+	 * @return the local hand function
+	 */
+	public ArrayList<Card> getHand(){
+		return hand;
+	}
+	
 	/**
 	 * Used to calculate the total of a player's hand
 	 * @return the sum of all card values in hand
 	 */
-	public int sumValues() {
+	public int sumValues(int user) {
 		sum = 0;
 		for(Card c : hand) {
 			if(rList.contains(c.getValue()))
 				sum += 10;
 			else if(c.getValue().equals("A")) {
-				System.out.println("Ace high or low? (enter h or l)");
-				choice = sc.nextLine();
-				if(choice.equals("h"))
-					sum += 11;
-				else
-					sum += 1;
+				if(user == 1) {
+					System.out.println("Ace high or low? (enter h or l)");
+					choice = sc.nextLine();
+					if(choice.equals("h"))
+						sum += 11;
+					else
+						sum += 1;
+				}
+				else {
+					int choice = rand.nextInt((1 - 0) + 1) + 0;
+					if(choice == 1)
+						sum += 11;
+					else
+						sum += 1;
+				}
 			}
 			else
 				sum += Integer.valueOf(c.getValue());			
