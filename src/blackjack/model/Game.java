@@ -12,6 +12,6 @@ public class Game {
         Dealer++;
     }
     // Make these Users
-    private int Player;
-    private int Dealer;
+    public int Player;
+    public int Dealer;
 }
