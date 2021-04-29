@@ -21,21 +21,22 @@ public class User extends Deck{
   {
     Card aCard = deal(); // deal() is method of class Deck
     if(handsList.size() == 0){
-        ArrayList<Card> hand = new ArrayList<Card>();
-        hand.add(aCard);
-        handsList.add(hand);
+      ArrayList<Card> hand = new ArrayList<Card>();
+      hand.add(aCard);
+      handsList.add(hand);
     }
     else{
-        handsList.get(handNumber-1).add(aCard);
+      handsList.get(handNumber-1).add(aCard);
     }
   }
+
   // precondition to hit: User has at least 1 hand
   // hit function asks player which hand they want to hit, so handNumber argument is passed
   public void hit(int handNumber){
-      this.addCard(handNumber); // add one card to the hand that player chooses to hit
-      int totalForCurHand = this.numCards.get(handNumber-1);
-      totalForCurHand++;
-      this.numCards.set(handNumber-1, totalForCurHand); //increment total cards in current hand
+    this.addCard(handNumber); // add one card to the hand that player chooses to hit
+    int totalForCurHand = this.numCards.get(handNumber-1);
+    totalForCurHand++;
+    this.numCards.set(handNumber-1, totalForCurHand); //increment total cards in current hand
 
   }
 
@@ -88,18 +89,20 @@ public class User extends Deck{
     int numAces = 0;
 
     ArrayList<Card> wantSum = this.handsList.get(handNumber-1);
-    cardValue = wantSum.getValue();
-    if(cardValue == 1){ //Ace
-      numAces++;
-      handSum += 11;
+    for(int c = 0; c < numCards.get(handNumber-1); c++){
+      cardValue = wantSum.get(c).getValue();
+      if(cardValue == 1){ //Ace
+        numAces++;
+        handSum += 11;
+      }
+      else if (cardValue > 10){ //face card
+        handSum += 10;
+      }
+      else{
+        handSum += cardValue;
+      }
     }
-    else if (cardValue > 10){ //face card
-      handSum += 10;
-    }
-    else{
-      handSum += cardValue;
-    }
-   
+
     // decide whether ace is 1 or 11
     // while handSum > 21 and numAces > 0, change ace card from 11 to 1, decrement numAces
     while (handSum > 21 && numAces > 0){
@@ -109,7 +112,7 @@ public class User extends Deck{
 
     return handSum;
   }
-  
+
   // Check for win of a hand, and incrementing the win if condition holds.
   // Pass the hand you want to determine the win, and pass sum scores of dealer
   public void determineWin(int handNumber, int dealerSum){
@@ -123,20 +126,20 @@ public class User extends Deck{
       System.out.println("\nThis hand beats the dealer.\n");
       this.wins++;
     }
-    
-     else if (handSum < dealerSum && dealerSum < 21){
+
+    else if (handSum < dealerSum && dealerSum < 21){
       System.out.println("\nThe dealer beats this hand.\n");
     }
 
     else if (handSum == dealerSum && handSum < 21 && dealerSum < 21){
       System.out.println("\nThis hand has a tie with the dealer.\n");
     }
- 
+
     else if (dealerSum > 21 && handSum < 21){
       System.out.println("\nThe dealer busts.\n");
       this.wins++;
     }
-    
+
     else { // handSum > 21
       System.out.println("\nThis hand busts.\n");
     }
