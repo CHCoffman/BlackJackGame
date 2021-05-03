@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.Before;
@@ -28,7 +29,12 @@ class DeckTest {
 		System.setOut(new PrintStream(outputStreamCaptor));
 	
 	}
-	
+	@Test
+	public void testShuffle() throws Exception{
+		ArrayList<Card> shufDeck = new ArrayList<Card>();
+		deck.shuffle(shufDeck);
+		assertNotEquals(shufDeck, deck);
+	}
 	@Test
 	public void testDeckCreated() throws Exception{
 		assertNotNull(deck);
@@ -37,6 +43,24 @@ class DeckTest {
 	public void testDisplay() throws Exception{
 		Deck.Display();
 		assertEquals(outputStreamCaptor.toString(), outputStreamCaptor.toString());
+	}
+	@Test
+	public void testDeal() throws Exception{
+		Card card = Deck.deal();
+		assertNotNull(card);
+	}
+	@Test
+	public void testGetDeck() throws Exception{
+		ArrayList<Card> testDeck = deck.getDeck();
+		assertNotNull(testDeck);
+	}
+	@Test
+	public void testSetDeck() throws Exception{
+		ArrayList<Card> newDeck = new ArrayList<Card>();
+		deck.setDeck(newDeck);
+		assertNotNull(newDeck);
+		assertNotNull(deck);
+		assertNotEquals(deck, newDeck);
 	}
 	
 	@After

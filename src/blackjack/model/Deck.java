@@ -48,7 +48,7 @@ public class Deck {
 	 * Removes and returns the first card in deck to be sent to a hand
 	 * @return the card to be dealt
 	 */
-	public Card deal() {
+	public static Card deal() {
 		Card dealtCard = deck.get(0);
 		deck.remove(0);
 		return dealtCard;
