@@ -8,13 +8,18 @@ import blackjack.view.ViewExceptions.BlackjackGUIException;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A GUI component for the entire blackjack game
+ */
 public class BlackjackGameComponent extends JPanel {
     private BlackjackHandComponent m_userHand;
     private BlackjackHandComponent m_dealerHand;
     private JPanel m_handPanel;
     private BlackjackControllerPanel m_controlPanel;
+
     /**
-     * A component representing the current game state
+     * A GUI component for the entire blackjack game
+     * @param listener A listener to register for gui updates
      */
     public BlackjackGameComponent(ModelListener listener) {
         m_userHand = new BlackjackHandComponent(5, new Dimension(100, 150));

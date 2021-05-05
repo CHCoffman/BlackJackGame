@@ -11,6 +11,9 @@ import blackjack.view.WinLossEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * The entry point for the blackjack game
+ */
 public class Entry {
     public static void main(String[] args) {
         Game gameImpl = new Game();

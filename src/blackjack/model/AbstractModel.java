@@ -3,6 +3,9 @@ package blackjack.model;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * An abstract class allowing classes to notify ModelListeners of ModelEvents
+ */
 public abstract class AbstractModel implements Model {
 	
 	private List<ModelListener> listeners = new ArrayList<ModelListener>(5);

@@ -1,5 +1,8 @@
 package blackjack.model;
 
+/**
+ * An information packet giving the model information about what user events have occured
+ */
 public class ModelEvent {
 	/**
 	 * The type of model event

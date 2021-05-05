@@ -5,6 +5,9 @@ import blackjack.view.ViewExceptions.BlackjackDeckDataStoreException;
 
 import java.awt.*;
 
+/**
+ * A static class that manages the memory for blackjack cards and handles the creation of card views
+ */
 public class BlackjackDeckDataStore {
     private static BlackjackCardData[] m_cardData = new BlackjackCardData[53];
     private static final int SUITE_CLUBS_OFFSET = 0;

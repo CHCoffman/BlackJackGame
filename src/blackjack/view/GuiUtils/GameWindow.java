@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * A window for the blackjack game
+ */
 public class GameWindow extends JFrame {
     private Dimension m_windowSize;
 

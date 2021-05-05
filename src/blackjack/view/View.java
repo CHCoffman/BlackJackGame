@@ -12,6 +12,9 @@ import blackjack.view.GuiUtils.GameWindow;
 import blackjack.view.ViewExceptions.BlackjackGUIException;
 import blackjack.model.AbstractModel;
 
+/**
+ * A container for the visual representation of a blackjack game
+ */
 public class View implements ViewEventListener {
     private BlackjackGameComponent m_game;
     private GameWindow m_window;

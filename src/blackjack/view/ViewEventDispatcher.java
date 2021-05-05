@@ -5,6 +5,9 @@ import blackjack.view.ViewExceptions.BlackjackGUIException;
 
 import java.util.ArrayList;
 
+/**
+ * Handles listener notification for ViewEvents
+ */
 public class ViewEventDispatcher {
     private ArrayList<ViewEventListener> m_receivers = new ArrayList<>();
 

@@ -9,6 +9,9 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+/**
+ * A GUI component for a user's hand in a game of Blackjack
+ */
 public class BlackjackHandComponent extends JPanel {
     private BlackjackCardComponent[] m_cards;
     private int m_curCardIndex = 0;

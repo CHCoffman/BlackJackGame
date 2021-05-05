@@ -5,6 +5,9 @@ import blackjack.model.Card;
 import java.awt.*;
 import java.awt.image.ImageObserver;
 
+/**
+ * A memory alias for a blackjack card's data
+ */
 public class BlackjackCardView {
     private Image m_data = null;
     private Dimension m_viewDimensions = new Dimension();

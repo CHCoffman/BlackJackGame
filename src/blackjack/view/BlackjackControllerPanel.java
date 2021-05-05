@@ -11,6 +11,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * A GUI component for blackjack controls
+ */
 public class BlackjackControllerPanel extends AbstractModel {
     private static final String dealerTotalBase = "Dealer Total:";
     private static final String userTotalBase = "Player Total:";
@@ -22,6 +25,11 @@ public class BlackjackControllerPanel extends AbstractModel {
     private JLabel m_dealerTotal = new JLabel(dealerTotalBase);
     private JPanel m_panel = new JPanel();
     private ModelEvent m_lastEvent = null;
+
+    /**
+     * A GUI component for blackjack controls
+     * @param listener The listener to update when the controls are used
+     */
     public BlackjackControllerPanel(ModelListener listener) {
         m_panel.setLayout(new GridLayout(6, 1));
         m_panel.add(m_dealerTotal);
@@ -59,11 +67,25 @@ public class BlackjackControllerPanel extends AbstractModel {
             }
         });
     }
+
+    /**
+     * Gets the java swing JPanel component managed by the controller panel
+     * @return The java swing JPanel component
+     */
     public JPanel GetPanel() { return m_panel; }
-    public ModelEvent GetLastEvent() { return m_lastEvent; }
+
+    /**
+     * Updates the player total JLabel text with a new score
+     * @param newTotal The score to set for the player
+     */
     public void UpdatePlayerTotal(int newTotal) {
         m_userTotal.setText(userTotalBase + " " + Integer.toString(newTotal));
     }
+
+    /**
+     * Updates the dealer total JLabel text with a new score
+     * @param newTotal The score to set for the dealer
+     */
     public void UpdateDealerTotal(int newTotal) {
         m_dealerTotal.setText(dealerTotalBase + " " + Integer.toString(newTotal));
     }

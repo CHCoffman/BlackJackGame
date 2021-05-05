@@ -3,6 +3,9 @@ import blackjack.model.Card;
 
 import java.util.ArrayList;
 
+/**
+ * A representation of a game of blackjack
+ */
 public class GameState extends ViewEvent {
     private ArrayList<Card> m_playerCards;
     private ArrayList<Card> m_dealerCards;

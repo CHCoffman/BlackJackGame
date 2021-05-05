@@ -7,6 +7,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.Buffer;
 import blackjack.model.Card;
+
+/**
+ * A container for a blackjack card's texture data
+ */
 public class BlackjackCardData {
     private static final String FilePathBase = "Resources\\Cards\\PNG\\";
     private Card m_cardBase;
