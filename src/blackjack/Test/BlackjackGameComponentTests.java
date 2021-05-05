@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class BlackjackGameComponentTests {
-    BlackjackGameComponent component = new BlackjackGameComponent();
+    BlackjackGameComponent component = new BlackjackGameComponent(null);
     ArrayList<Card> MakeHand(int size) {
         ArrayList<Card> hand = new ArrayList<Card>(size);
         for(int i = 0; i < size; i ++) {

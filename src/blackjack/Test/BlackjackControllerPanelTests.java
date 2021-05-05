@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class BlackjackControllerPanelTests {
-    BlackjackControllerPanel panel = new BlackjackControllerPanel();
+    BlackjackControllerPanel panel = new BlackjackControllerPanel(null);
     @BeforeAll
     public static void InitTests() {
         BlackjackDeckDataStore.Initialize();

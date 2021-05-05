@@ -1,18 +1,30 @@
 package blackjack.model;
 
 public class ModelEvent {
-	public enum EventKind {
-		BalanceUpdate, AgentStatusUpdate
+	/**
+	 * The type of model event
+	 */
+	public enum EventType {
+		HIT,
+		STAND,
+		SPLIT,
+		FOLD,
 	}
-	private EventKind kind;
-	private double balance;
-	public ModelEvent(EventKind kind, double balance){
-		this.balance = balance;
-		this.kind = kind;
+	private EventType m_type;
+
+	/**
+	 * A model event is passed to the model from the view
+	 * @param t The type of event
+	 */
+	public ModelEvent(EventType t) {
+		m_type = t;
 	}
-	public EventKind getKind(){return kind;}
-	public double getBalance(){
-		return balance;
+
+	/**
+	 * Gets the type of the model event
+	 * @return The model event EventType
+	 */
+	public EventType GetType() {
+		return m_type;
 	}
-	
 }

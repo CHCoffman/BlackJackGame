@@ -11,6 +11,11 @@ public class BlackjackCardData {
     private static final String FilePathBase = "Resources\\Cards\\PNG\\";
     private Card m_cardBase;
     private Image m_baseImage = null;
+
+    /**
+     * BlackjackCardData creates storage for a given card
+     * @param card The card to create storage for
+     */
     public BlackjackCardData(Card card) {
         m_cardBase = card;
         String fileSourcePath = FilePathBase + ConvertCardToFilename(card);
@@ -27,6 +32,12 @@ public class BlackjackCardData {
             LoadInvalidCard();
         }
     }
+
+    /**
+     * Gets a scaled representation of the card data
+     * @param dimensions The size of the card to scale it to
+     * @return A scaled version of the card
+     */
     public Image GetScaledInstance(Dimension dimensions) {
         if(dimensions.width < 0 || dimensions.height < 0) {
             return m_baseImage.getScaledInstance(1, 1, Image.SCALE_FAST);
@@ -36,14 +47,31 @@ public class BlackjackCardData {
         }
         return m_baseImage.getScaledInstance(dimensions.width, dimensions.height, Image.SCALE_FAST);
     }
+
+    /**
+     * Set the card's data to be invalid. This is called when any of the BlackJackCardData's accessors fail
+     */
     private void LoadInvalidCard() {
         BufferedImage invalidImg = new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB);
         invalidImg.setRGB(0, 0, Color.MAGENTA.getRGB());
         m_baseImage = invalidImg;
     }
+
+    /**
+     * Converts a card to a relative path to it's associated resource
+     * @param card The card to build a filepath for
+     * @return A Path to the card's resource
+     */
     private String ConvertCardToFilename(Card card) {
         return card.getValue() + ConvertSuitToFilePart(card.getSuit()) + ".png";
     }
+
+    /**
+     * Converts a card's suit into the expected format for it's resource
+     * @param suit The suite to convert
+     * @return A string of length one of the first letter of the suit, and INVALID if the suit is not recognized.
+     * E.g Clubs will return C, Cubs will return INVALID
+     */
     private String ConvertSuitToFilePart(String suit) {
         switch(suit) {
             case "Clubs": return "C";
@@ -53,24 +81,4 @@ public class BlackjackCardData {
         }
         return "INVALID";
     }
-    /*
-
-    private String ConvertCardNumToString(int num) {
-        if(num <= 0 || num >= 14) {
-            return "";
-        }
-        if(num > 10 || num == 1) {
-            switch(num) {
-                case 1: return "A";
-                case 11: return "J";
-                case 12: return "Q";
-                case 13: return "K";
-            }
-        }
-        else {
-            return String.valueOf(num);
-        }
-        return "";
-    }
-     */
 }

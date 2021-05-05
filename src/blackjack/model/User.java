@@ -90,7 +90,22 @@ public class User extends Deck{
 
     ArrayList<Card> wantSum = this.handsList.get(handNumber-1);
     for(int c = 0; c < numCards.get(handNumber-1); c++){
-      cardValue = wantSum.get(c).getValue();
+      String strVal = wantSum.get(c).getValue();
+      if(strVal.equals("J")) {
+        cardValue = 11;
+      }
+      else if(strVal.equals("Q")) {
+        cardValue = 12;
+      }
+      else if(strVal.equals("K")) {
+        cardValue = 13;
+      }
+      else if(strVal.equals("A")) {
+        cardValue = 1;
+      }
+      else {
+        cardValue = Integer.parseInt(strVal);
+      }
       if(cardValue == 1){ //Ace
         numAces++;
         handSum += 11;

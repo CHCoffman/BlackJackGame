@@ -11,19 +11,26 @@ import java.awt.event.MouseListener;
 
 public class BlackjackHandComponent extends JPanel {
     private BlackjackCardComponent[] m_cards;
-    private Dimension m_originalCardSize;
     private int m_curCardIndex = 0;
+
+    /**
+     * A BlackjackHandComponent is a collection of BlackjackCardComponents, used to display a particular hand
+     * @param maxHandSize The maximum number of cards in a hand
+     * @param cardSize The on screen dimensions of each of the hands cards
+     */
     public BlackjackHandComponent(int maxHandSize, Dimension cardSize) {
         m_cards = new BlackjackCardComponent[maxHandSize];
-        m_originalCardSize = cardSize;
         setLayout(new GridLayout(1, maxHandSize));
-        Dimension componentSize = new Dimension(
-                (int)(m_originalCardSize.width * maxHandSize * 1.2),
-                (int)(m_originalCardSize.height * 1.2));
-        setMinimumSize(componentSize);
-        setMaximumSize(componentSize);
-        setPreferredSize(componentSize);
+        setMinimumSize(cardSize);
+        setMaximumSize(cardSize);
+        setPreferredSize(cardSize);
     }
+
+    /**
+     * Adds a new card to the hand
+     * @param c The card to add
+     * @return If the card was successfully added
+     */
     public boolean AddCard(Card c) {
         if(m_curCardIndex == m_cards.length) {
             return false;
@@ -61,6 +68,12 @@ public class BlackjackHandComponent extends JPanel {
         m_curCardIndex++;
         return true;
     }
+
+    /**
+     * Sets a specific card in the hand
+     * @param v A new card to set
+     * @param index The index of the card component
+     */
     public void SetCard(BlackjackCardComponent v, int index) {
         if(m_cards[index] != null) {
             remove(m_cards[index]);

@@ -9,6 +9,12 @@ public class BlackjackCardView {
     private Image m_data = null;
     private Dimension m_viewDimensions = new Dimension();
     private Card m_card;
+
+    /**
+     * An alias for a BlackJackCardData's memory
+     * @param image An Image representing the card, but not actually containing the card's data
+     * @param card The card to create a view of
+     */
     public BlackjackCardView(Image image, Card card) {
         m_data = image;
         m_card = card;
@@ -25,8 +31,24 @@ public class BlackjackCardView {
             }
         });
     }
+
+    /**
+     * Gets the Image of the view
+     * @return The view's image
+     */
     public Image GetImage() { return m_data; }
+
+    /**
+     * Gets the size of the view
+     * @return The size of the view
+     */
     public Dimension GetDimensions() { return m_viewDimensions; }
+
+    /**
+     * Scales the view to be a new size
+     * @param d The new size of the view
+     * @return If the scale was successful
+     */
     public boolean Scale(Dimension d) {
         if(d.width <= 0 || d.height <= 0) {
             return false;

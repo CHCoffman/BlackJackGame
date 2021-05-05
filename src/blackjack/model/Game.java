@@ -1,130 +1,61 @@
 package blackjack.model;
 
+import blackjack.view.GameState;
+import blackjack.view.ViewEventDispatcher;
+import blackjack.view.ViewEventListener;
+import blackjack.view.ViewExceptions.BlackjackGUIException;
+import blackjack.view.WinLossEvent;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
-public class Game {
-    public Game() {
-        // Initialize game state
-        Player = 0;
-        Dealer = 0;
-    }
-
-    public void OnEvent() { // Event e
-        // Update game state
-        Player++;
-        Dealer++;
-    }
-
-    // Make these Users
-    public int Player;
-    public int Dealer;
-
-
-    public static void main(String[] args) {
-        Deck deck = new Deck();
-
-
-        Hand player = new Hand();
-        Hand dealer = new Hand();
-        Hand player_tmp = null;
-        ArrayList<Hand> handListPlayer = new ArrayList<Hand>();
-        ArrayList<Hand> handListDealer = new ArrayList<Hand>();
-        int playerScore, dealerScore;
-
-        handListPlayer.add(player);
-        handListDealer.add(dealer);
-
-
-        deck.Display();
-        System.out.println("\n\n");
-
-
-        System.out.println("Dealer is shuffling deck . . .");
-        deck.setDeck(deck.shuffle(deck.getDeck()));
-        deck.Display();
-
-        for (int i = 0; i < 2; i++) {
-            Card temp = deck.deal();
-
-            System.out.println(temp.getValue() + " of " + temp.getSuit());
-
-            player.hand.add(temp);
-            //player.display();
-        }
-
-
-        System.out.println("\n\n");
-        for (int i = 0; i < 2; i++) {
-            Card temp = deck.deal();
-
-            System.out.println(temp.getValue() + " of " + temp.getSuit());
-
-            dealer.hand.add(temp);
-            //player.display();
-        }
-
-
-//		handListPlayer = Split(player);
-//		
-//		for(Hand h : handListPlayer) {
-//			
-//			for(Card c : h.getHand()) {
-//			
-//				System.out.println(c.getValue() + " of " + c.getSuit());
-//			}
-//			System.out.println("Hand complete\n");
-//		}
-//		
-//		for(Hand h : handListDealer) {
-//			
-//			for(Card c : h.getHand()) {
-//			
-//				System.out.println(c.getValue() + " of " + c.getSuit());
-//			}
-//			System.out.println("Hand complete\n");
-//		}
-
-        System.out.println("\n\n");
-        playerScore = player.sumValues(1);
-        System.out.println("\n\n");
-        dealerScore = dealer.sumValues(0);
-
-
-        System.out.println(playerScore);
-        System.out.println(dealerScore);
-
-
-        if (playerScore > dealerScore) {
-            System.out.println("You win!!!");
-        } else if (playerScore < dealerScore) {
-            System.out.println("You lose!!!");
-        } else
-            System.out.println("It's a tie!!!");
-    }
-
+public class Game implements ModelListener{
+    private User player;
+    private User dealer;
+    private ViewEventDispatcher dispatcher;
 
     /**
-     * Splits a player's hand into two hands
-     *
-     * @param hand the hand to be split in two. Should contain two card of equal value
-     * @return an arraylist of hands, each containg one of the cards contained in the hand
-     * passed in the argument
+     * A representation of a blackjack game
      */
-    public static ArrayList<Hand> Split(Hand hand) {
+    public Game() {
+        dispatcher = new ViewEventDispatcher();
+        // Deal cards to player and dealer
+    }
 
-        ArrayList<Hand> tmp = new ArrayList<Hand>();
-        Hand tmpHand = null;
+    /**
+     * Adds a ViewEventListener to the game
+     * @param listener The listener to add
+     */
+    public void AddView(ViewEventListener listener) {
+        dispatcher.AddListener(listener);
+    }
 
+    /**
+     * Dispatches an event to the Game's views
+     * @param me The event to dispatch
+     */
+    @Override
+    public void modelChanged(ModelEvent me) {
+        System.out.println(me.GetType().toString());
+        try {
+            // If the player has won: dispatcher.DispatchEvent(new WinLossEvent(true));
+            // If the dealer has won: dispatcher.DispatchEvent(new WinLossEvent(false));
+            // else
+            dispatcher.DispatchEvent(GetState());
+        }
+        catch(BlackjackGUIException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
-        tmpHand = new Hand();
-        tmpHand.getHand().add(hand.getHand().get(1));
-        hand.getHand().remove(1);
-
-
-        tmp.add(hand);
-        tmp.add(tmpHand);
-
-        return tmp;
-
+    /**
+     * Gets the current state of the game
+     * @return The current game state
+     */
+    public GameState GetState() {
+        ArrayList<Card> playerCards = new ArrayList<>(Arrays.asList(new Card("3", "Clubs")));
+        ArrayList<Card> dealerCards = new ArrayList<>(Arrays.asList(new Card("4", "Diamonds")));
+        return new GameState(playerCards, dealerCards, 3, 4);
     }
 }
